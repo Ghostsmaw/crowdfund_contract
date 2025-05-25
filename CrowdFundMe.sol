@@ -13,15 +13,22 @@ contract CrowdFundMe {
     address[] public funders;
     mapping (address funder => uint256 amountFunded) public addressToAmountFunded;
 
+    address public owner;
+
+     constructor() {
+        owner = msg.sender;
+    }
+
     function fund() public payable {
         require(msg.value.getConversionRate() >=minimumUsd, "Not enough amount");
         funders.push(msg.sender);
         addressToAmountFunded[msg.sender] += msg.value;
     }
     
-    function fund(uint256 value) public payable {}
+    // function fund(uint256 value) public payable {}
 
     function withdraw() public {
+        require(msg.sender == owner, "Must be the owner!");
         for(uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++){
             address funder = funders[funderIndex];
             addressToAmountFunded[funder] = 0;
