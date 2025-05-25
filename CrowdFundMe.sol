@@ -8,10 +8,16 @@ contract CrowdFundMe {
 
     uint256 public minimumUsd = 5;
 
+    address[] public funders;
+    mapping (address funder => uint256 amountFunded) public addressToAmountFunded;
+
     function fund() public payable {
-
         require(msg.value >=minimumUsd, "Not enough amount");
-
+        funders.push(msg.sender);
+        addressToAmountFunded[msg.sender] += msg.value;
+    }
+    
+    function fund(uint256 value) public payable {
     }
 
     function withdraw() public {}
