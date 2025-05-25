@@ -4,23 +4,25 @@ pragma solidity 0.8.24;
 
 import {PriceConverter} from "./PriceConverter.sol";
 
+error NotOwner();
+
 contract CrowdFundMe {
 
     using PriceConverter for uint256;
 
-    uint256 public minimumUsd = 5;
+    uint256 public constant MINIMUM_USD = 50 * 1e18;
 
     address[] public funders;
     mapping (address funder => uint256 amountFunded) public addressToAmountFunded;
 
-    address public owner;
+    address public immutable i_owner;
 
      constructor() {
-        owner = msg.sender;
+        i_owner = msg.sender;
     }
 
     function fund() public payable {
-        require(msg.value.getConversionRate() >=minimumUsd, "Not enough amount");
+        require(msg.value.getConversionRate() >= MINIMUM_USD, "Not enough amount");
         funders.push(msg.sender);
         addressToAmountFunded[msg.sender] += msg.value;
     }
@@ -38,8 +40,16 @@ contract CrowdFundMe {
     }
 
     modifier onlyOwner(){
-        require(msg.sender == owner, "Must be the owner!");
+        if(msg.sender != i_owner) {revert NotOwner(); }
         _;
     }
+
+    receive() external payable { 
+        fund();
+    }
+
+    fallback() external payable {
+        fund();
+     }
 
 }
