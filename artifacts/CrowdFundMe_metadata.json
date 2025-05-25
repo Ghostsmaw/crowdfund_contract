@@ -125,11 +125,11 @@
 			]
 		},
 		"CrowdFundMe.sol": {
-			"keccak256": "0xa810341708810e4d9158ac3113797e346c8445ff956566b7e91ea28e92f7fe57",
+			"keccak256": "0xc7abe2332cdde5c452279482ef055dbd53989f378ce5292946c6b99393443682",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ff8851394bd43079544e8e413830de23476cd794138a0535334d47fd1aad0978",
-				"dweb:/ipfs/QmQYveVwLDHj3aDbRkYgyAHfBNDrnwWwPdNYCiUcF2WLTE"
+				"bzz-raw://870ab03043f5b5de3439b610cda0c623f3b0c9cc122c5c8932b33f4087e8b52a",
+				"dweb:/ipfs/QmV5MtyexSvw7GuyQSfJHcdqtAFpkseshiDt9q6vBkXEiL"
 			]
 		},
 		"PriceConverter.sol": {
